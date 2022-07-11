@@ -37,6 +37,7 @@ public class User {
 		try {
 			@SuppressWarnings("unchecked")
 			Long userid = (Long) session.getAttribute("SESSION_ID");
+			System.out.println(userid);
 			List<Contacts> contact = userservice.listContactById(userid);
 		return contact; 
 		} catch (IdNotFoundException e) {
@@ -50,13 +51,17 @@ public class User {
 		user.setUsername(un);
 		user.setPassword(pw);
 		@SuppressWarnings("unchecked")
-		Long id = (Long) request.getSession().getAttribute("SESSION_ID");
-		Long userid = userservice.listUser(user);
+		String id = (String) request.getSession().getAttribute("SESSION_ID");
+		System.out.println("attached id");
+		Long userid = userservice.listUser(un,pw);
 		if(userid != 0L) {
 		request.getSession().setAttribute("SESSION_ID", userid);
 		return user;
+		}else {
+			Credentials cr = new Credentials();
+			cr.setUsername("");
+		return cr;
 		}
-		return null;
 	}
 	
 	@PostMapping("/addcontact")
@@ -69,6 +74,7 @@ public class User {
 	}
 	@PostMapping("/logout")
 	public void destroySession(HttpServletRequest request) {
+		request.getSession().getAttribute("SESSION_ID");
 		request.getSession().invalidate();
 		
 	}

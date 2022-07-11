@@ -49,10 +49,10 @@ public class UserServiceImpl implements UserService {
 		return conts;
 	}
 
-	public Long listUser( Credentials user) {
-		Long id = userjpa.listUser(user.getUsername(),user.getPassword());
+	public Long listUser( String un, String pw) {
+		Long id = userjpa.listUser(un,pw);
 		try {
-		if(id != 0) {
+		if(id != null) {
 			logger.info("userid {}",id);
 			return id;
 		}

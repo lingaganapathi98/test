@@ -13,7 +13,7 @@ public interface UserService {
 	
 	public void createUser(UserModel user);
 	//public List<ContactModel> listContactById(Long id) throws IdNotFoundException;
-	public Long listUser( Credentials user);
+	public Long listUser( String un,String pw);
 	public List<Contacts> listContactById(Long id) throws IdNotFoundException;
 	public void addcontact(ContactModel contact);
 
